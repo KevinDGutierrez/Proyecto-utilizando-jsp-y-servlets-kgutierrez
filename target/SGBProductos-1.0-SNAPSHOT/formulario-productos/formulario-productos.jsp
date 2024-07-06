@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
+<%@page import = "java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,7 +16,7 @@
     </head>
     
     <body>
-<nav class="position-relative navbar navbar-dark bg-dark fixed-top">
+        <nav class="position-relative navbar navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../index.jsp">Sistema de gestión de inventarios</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
@@ -34,7 +35,7 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="formulario-productos.jsp">Formulario de Productos</a>
                             </li>
-                            <li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="../lista-productos/lista-productos.jsp">Lista de Productos</a>
                             </li>
                         </ul>
@@ -42,28 +43,60 @@
                 </div>
             </div>
         </nav>
-        <div class="container mt-5 w-75">
-            <div class="form-floating mb-4">
-                <input class="form-control" id="nombreProducto" name="nombreProducto" type="text" placeholder="">
-                <label for="nombreProducto">Nombre del Producto</label>
-            </div>
-            <div class="form-floating mb-4">
-                <textarea class="form-control" id="descripcionProducto" name="descripcionProducto" placeholder=""></textarea>
-                <label for="descripcionProducto">Descripción del Producto</label>
-            </div>
-            <div class="form-floating mb-4">
-                <input type="text" class="form-control" id="marcaProducto" name="marcaProducto" placeholder="">
-                <label for="marcaProducto">Marca del Producto</label>
-            </div>
-            <div class="input-group mb-4">
-                <span class="input-group-text">Q</span>
-                <input type="text" class="form-control">
-                <span class="input-group-text">.00</span>
-            </div>
-            <div>
-                <input class="btn btn-success" type="submit">
-            </div>
+        
+        <div class="container mt-5 pt-5">
+            <% ArrayList<String> producto = (ArrayList)request.getAttribute("producto"); %>
+            
+            <% if(request.getAttribute("mensaje") != null) { %>
+                <div class="alert alert-success text-center mt-3" role="alert">
+                    <%= request.getAttribute("mensaje") %>
+                </div>
+            <% } %>
+            
+            <% if(producto != null) { %>
+                <div class="card mt-3 border-info">
+                    <div class="card-header text-white bg-info">
+                        Producto Agregado
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <% for(String pro : producto) { %>
+                            <li class="list-group-item"><%= pro %></li>
+                        <% } %>
+                    </ul>
+                </div>
+            <% } %>
         </div>
+        
+        <div class="container mt-5 w-75">
+            <form action="/SGBProductos/producto-servlet/" method="post" enctype="multipart/form-data">
+                <!-- Nombre del Producto -->
+                <div class="form-floating mb-4">
+                    <input class="form-control" id="nombreProducto" name="nombreProducto" type="text" placeholder="Nombre del Producto" aria-label="Nombre del Producto">
+                    <label for="nombreProducto">Nombre del Producto</label>
+                </div>
+                <!-- Descripción del Producto -->
+                <div class="form-floating mb-4">
+                    <textarea class="form-control" id="descripcionProducto" name="descripcionProducto" placeholder="Descripción del Producto" aria-label="Descripción del Producto"></textarea>
+                    <label for="descripcionProducto">Descripción del Producto</label>
+                </div>
+                <!-- Marca del Producto -->
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="marcaProducto" name="marcaProducto" placeholder="Marca del Producto" aria-label="Marca del Producto">
+                    <label for="marcaProducto">Marca del Producto</label>
+                </div>
+                <!-- Precio del Producto -->
+                <div class="input-group mb-4">
+                    <span class="input-group-text">Q</span>
+                    <input type="text" class="form-control" id="precioProducto" name="precioProducto" placeholder="Precio del Producto" aria-label="Precio del Producto">
+                    <span class="input-group-text">.00</span>
+                </div>
+                <!-- Botón Agregar -->
+                <div>
+                    <input class="btn btn-success" type="submit" value="Agregar">
+                </div>
+            </form>
+        </div>
+        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>
