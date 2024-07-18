@@ -36,7 +36,7 @@
                                 <a class="nav-link active" href="formulario-productos.jsp">Formulario de Productos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../lista-productos/lista-productos.jsp">Lista de Productos</a>
+                                <a class="nav-link" href="../producto-servlet">Lista de Productos</a>
                             </li>
                         </ul>
                     </div>
@@ -68,7 +68,7 @@
         </div>
         
         <div class="container mt-5 w-75">
-            <form action="/SGBProductos/producto-servlet/" method="post" enctype="multipart/form-data">
+            <form action="/SGBProductos/producto-servlet" method="post" enctype="multipart/form-data">
                 <!-- Nombre del Producto -->
                 <div class="form-floating mb-4">
                     <input class="form-control" id="nombreProducto" name="nombreProducto" type="text" placeholder="Nombre del Producto" aria-label="Nombre del Producto">

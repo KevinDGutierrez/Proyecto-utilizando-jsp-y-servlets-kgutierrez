@@ -1,0 +1,6 @@
+Main.class
+org\kevingutierrez\webapp\Servlet\ProductoServlet.class
+org\kevingutierrez\webapp\model\Producto.class
+org\kevingutierrez\webapp\util\JpaUtil.class
+org\kevingutierrez\webapp\service\IProductoService.class
+org\kevingutierrez\webapp\service\ProductoService.class
